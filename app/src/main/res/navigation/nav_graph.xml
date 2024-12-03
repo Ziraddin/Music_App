@@ -4,11 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/searchFragment">
+
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.music_app.ui.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_albumDetailsFragment"
+            app:destination="@id/albumDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_searchFragment_to_trackDetailsFragment"
+            app:destination="@id/trackDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/playlistFragment"
@@ -22,4 +38,32 @@
         android:label="fragment_quiz"
         tools:layout="@layout/fragment_quiz" />
 
+    <fragment
+        android:id="@+id/albumDetailsFragment"
+        android:name="com.example.music_app.ui.details.album.AlbumDetailsFragment"
+        android:label="fragment_album_details"
+        tools:layout="@layout/fragment_album_details">
+        <argument
+            android:name="album"
+            app:argType="com.example.music_app.ui.search.data.Album" />
+        <action
+            android:id="@+id/action_albumDetailsFragment_to_trackDetailsFragment"
+            app:destination="@id/trackDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/trackDetailsFragment"
+        android:name="com.example.music_app.ui.details.track.TrackDetailsFragment"
+        android:label="fragment_track_details"
+        tools:layout="@layout/fragment_track_details">
+        <argument
+            android:name="track"
+            app:argType="com.example.music_app.ui.search.data.Track" />
+    </fragment>
+
 </navigation>
+

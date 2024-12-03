@@ -2,7 +2,6 @@ package com.example.music_app.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.music_app.R
@@ -18,13 +17,10 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        // Get NavController
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController: NavController = navHostFragment.navController
+        val navController = navHostFragment.navController
 
-        // Connect BottomNavigationView with NavController
         binding.bottomNavigationView.setupWithNavController(navController)
-
     }
 }
