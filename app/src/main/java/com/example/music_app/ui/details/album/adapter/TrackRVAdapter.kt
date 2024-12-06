@@ -7,7 +7,7 @@ import com.example.music_app.databinding.TrackItemBinding
 import com.example.music_app.ui.search.data.Track
 
 class TrackRVAdapter(
-    private val trackList: List<Track>,
+    private var trackList: List<Track>,
     private val onTrackClick: (Track) -> Unit,
 ) : RecyclerView.Adapter<TrackRVAdapter.TrackViewHolder>() {
 
@@ -16,12 +16,18 @@ class TrackRVAdapter(
 
         fun bind(track: Track) {
             binding.trackTitle.text = track.track_title
+            binding.trackArtist.text = track.artist_name
             binding.trackCoverImage.setImageResource(track.album_image)
 
             itemView.setOnClickListener {
                 onTrackClick(track)
             }
         }
+    }
+
+    fun updateData(newData: List<Track>) {
+        trackList = newData
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {

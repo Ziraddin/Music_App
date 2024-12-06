@@ -8,7 +8,7 @@ import com.example.music_app.ui.search.data.Album
 import com.example.music_app.ui.search.data.Track
 
 class GridRVAdapter(
-    private val itemList: List<Any>, private val onItemClick: (Any) -> Unit
+    private var itemList: List<Any>, private val onItemClick: (Any) -> Unit
 ) : RecyclerView.Adapter<GridRVAdapter.TrackViewHolder>() {
 
     inner class TrackViewHolder(private val binding: SearchGridItemBinding) :
@@ -31,6 +31,11 @@ class GridRVAdapter(
                 }
             }
         }
+    }
+
+    fun updateData(newData: List<Any>) {
+        itemList = newData
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {

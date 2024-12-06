@@ -8,8 +8,9 @@ import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class Album(
+    val id: Int,
     val album_title: String,
     val artist_name: String,
     var album_image: Int = R.drawable.ic_launcher_background,
-    val tracks: @RawValue List<Track>
+    var tracks: @RawValue List<Track>
 ) : Parcelable

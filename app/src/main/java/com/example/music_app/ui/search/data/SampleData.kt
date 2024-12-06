@@ -29,7 +29,7 @@ class SampleData {
 
                 albums.add(
                     Album(
-                        album_title = albumTitle, artist_name = artistName, tracks = tracks
+                        album_title = albumTitle, artist_name = artistName, tracks = tracks, id = 1
                     )
                 )
             }
