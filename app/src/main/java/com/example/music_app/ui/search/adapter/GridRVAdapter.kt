@@ -3,6 +3,7 @@ package com.example.music_app.ui.search.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.music_app.core.constants.SharedFunctions
 import com.example.music_app.databinding.SearchGridItemBinding
 import com.example.music_app.ui.search.data.Album
 import com.example.music_app.ui.search.data.Track
@@ -17,14 +18,14 @@ class GridRVAdapter(
         fun bind(item: Any) {
             when (item) {
                 is Track -> {
-                    binding.imageAlbumCover.setImageResource(item.album_image)
+                    SharedFunctions.loadImageFromUrl(binding.imageAlbumCover, item.track_image)
                     binding.textAlbumOrTrackTitle.text = item.track_title
                     binding.textArtistName.text = item.artist_name
                     itemView.setOnClickListener { onItemClick(item) }
                 }
 
                 is Album -> {
-                    binding.imageAlbumCover.setImageResource(item.album_image)
+                    SharedFunctions.loadImageFromUrl(binding.imageAlbumCover, item.album_image)
                     binding.textAlbumOrTrackTitle.text = item.album_title
                     binding.textArtistName.text = item.artist_name
                     itemView.setOnClickListener { onItemClick(item) }

@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.music_app"
-        minSdk = 30
+        minSdk = 33
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -68,5 +68,13 @@ dependencies {
 
     // Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+
+    //Media
+    implementation("androidx.media3:media3-exoplayer:1.4.0")
+    implementation("androidx.media3:media3-ui:1.4.0")
 
 }

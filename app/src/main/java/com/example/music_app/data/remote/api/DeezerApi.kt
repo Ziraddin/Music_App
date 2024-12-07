@@ -18,4 +18,5 @@ interface DeezerApi {
 
     @GET("/album/{trackId}/tracks")
     suspend fun getTracksById(@Path("trackId") trackId: Int): Response<TrackResponse>
+
 }

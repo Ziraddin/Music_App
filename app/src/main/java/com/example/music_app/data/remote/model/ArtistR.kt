@@ -8,9 +8,9 @@ data class ArtistR(
     val name: String,
     val picture: String,
 
-    @SerialName("picture_small") val pictureSmall: String,
+    @SerialName("picture_small") var picture_small: String,
 
-    @SerialName("picture_medium") val pictureMedium: String,
+    @SerialName("picture_medium") var picture_medium: String,
 
-    @SerialName("picture_big") val pictureBig: String,
+    @SerialName("picture_big") var picture_big: String,
 )

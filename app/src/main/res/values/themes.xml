@@ -4,6 +4,8 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:colorBackground">@color/white</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="Theme.Music_App" parent="Base.Theme.Music_App" />

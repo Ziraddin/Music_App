@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.music_app.core.constants.Converter
+import com.example.music_app.core.constants.SharedFunctions
 import com.example.music_app.data.remote.model.TrackR
 import com.example.music_app.databinding.FragmentAlbumDetailsBinding
 import com.example.music_app.ui.details.album.adapter.TrackRVAdapter
@@ -32,7 +33,7 @@ class AlbumDetailsFragment : Fragment() {
         rvAdapter = TrackRVAdapter(album.tracks, ::onTrackClick)
 
         bindData(album)
-        setUpGridRv()
+        setGridRv()
         getAlbumTracks(album)
 
         return binding.root
@@ -43,21 +44,25 @@ class AlbumDetailsFragment : Fragment() {
 
         viewModel.searchState.observe(viewLifecycleOwner) { response ->
             if (response is SearchState.Success) {
+                for (trackR in response.result as List<TrackR>) {
+                    trackR.artist.picture_big = album.artist_image
+                }
                 album.tracks = Converter.convertTrackRToTracks(response.result as List<TrackR>)
                 rvAdapter.updateData(album.tracks)
             } else if (response is SearchState.Error) {
                 println("Error: ${response.message}")
             }
         }
+
     }
 
     private fun bindData(album: Album) {
-        binding.albumCoverImage.setImageResource(album.album_image)
+        SharedFunctions.loadImageFromUrl(binding.albumCoverImage, album.album_image)
         binding.albumTitle.text = album.album_title
         binding.albumArtist.text = album.artist_name
     }
 
-    private fun setUpGridRv() {
+    private fun setGridRv() {
         binding.recyclerViewTracks.adapter = rvAdapter
     }
 

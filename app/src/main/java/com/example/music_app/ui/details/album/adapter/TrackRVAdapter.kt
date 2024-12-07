@@ -3,6 +3,7 @@ package com.example.music_app.ui.details.album.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.music_app.core.constants.SharedFunctions
 import com.example.music_app.databinding.TrackItemBinding
 import com.example.music_app.ui.search.data.Track
 
@@ -15,9 +16,9 @@ class TrackRVAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(track: Track) {
+            SharedFunctions.loadImageFromUrl(binding.trackCoverImage, track.track_image)
             binding.trackTitle.text = track.track_title
             binding.trackArtist.text = track.artist_name
-            binding.trackCoverImage.setImageResource(track.album_image)
 
             itemView.setOnClickListener {
                 onTrackClick(track)
