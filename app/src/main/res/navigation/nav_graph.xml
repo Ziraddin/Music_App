@@ -30,7 +30,15 @@
         android:id="@+id/playlistFragment"
         android:name="com.example.music_app.ui.playlist.PlaylistFragment"
         android:label="fragment_playlist"
-        tools:layout="@layout/fragment_playlist" />
+        tools:layout="@layout/fragment_playlist" >
+        <action
+            android:id="@+id/action_playlistFragment_to_playlistDetailsFragment"
+            app:destination="@id/playlistDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/quizFragment"
@@ -63,6 +71,22 @@
         <argument
             android:name="track"
             app:argType="com.example.music_app.ui.search.data.Track" />
+    </fragment>
+    <fragment
+        android:id="@+id/playlistDetailsFragment"
+        android:name="com.example.music_app.ui.details.playlist.PlaylistDetailsFragment"
+        android:label="fragment_playlist_details"
+        tools:layout="@layout/fragment_playlist_details" >
+        <argument
+            android:name="playlist"
+            app:argType="com.example.music_app.ui.playlist.Playlist" />
+        <action
+            android:id="@+id/action_playlistDetailsFragment_to_trackDetailsFragment"
+            app:destination="@id/trackDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
 </navigation>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.music_app.R
 import com.example.music_app.core.constants.SharedFunctions
@@ -89,6 +90,10 @@ class TrackDetailsFragment : Fragment() {
         SharedFunctions.loadImageFromUrl(binding.trackCoverImage, track.track_image)
         binding.trackTitle.text = track.track_title
         binding.trackArtist.text = track.artist_name
+        binding.toolbar.title = track.track_title
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     override fun onDestroyView() {

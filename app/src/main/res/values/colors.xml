@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Colors -->
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
-    <color name="spotify_black">#121212</color> <!-- Background color -->
-    <color name="spotify_green">#1DB954</color> <!-- Accent color -->
+    <color name="spotify_black">#121212</color>
+    <color name="spotify_green">#1DB954</color>
 
-    <color name="light_gray">#B3B3B3</color> <!-- Secondary text color -->
-    <color name="dark_gray">#535353</color> <!-- Tertiary text color -->
+    <color name="light_gray">#E2E1E1</color>
+    <color name="dark_gray">#535353</color>
 
-    <!-- Button States -->
-    <color name="button_pressed">#14833B</color> <!-- Darker green for pressed state -->
-    <color name="button_disabled">#2E2E2E</color> <!-- Disabled state background -->
 
-    <!-- Other Colors -->
-    <color name="error_red">#E22134</color> <!-- Error messages -->
-    <color name="spotify_transparent_black">#80000000</color> <!-- Semi-transparent overlay -->
+    <color name="button_pressed">#14833B</color>
+    <color name="button_disabled">#2E2E2E</color>
+
+    <color name="error_red">#E22134</color>
+    <color name="spotify_transparent_black">#80000000</color>
 </resources>

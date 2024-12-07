@@ -7,9 +7,12 @@ import com.example.music_app.core.constants.SharedFunctions
 import com.example.music_app.databinding.SearchGridItemBinding
 import com.example.music_app.ui.search.data.Album
 import com.example.music_app.ui.search.data.Track
+import kotlin.reflect.KFunction1
 
 class GridRVAdapter(
-    private var itemList: List<Any>, private val onItemClick: (Any) -> Unit
+    private var itemList: List<Any>,
+    private val onItemClick: (Any) -> Unit,
+    private val onLongPress: KFunction1<Track, Unit>,
 ) : RecyclerView.Adapter<GridRVAdapter.TrackViewHolder>() {
 
     inner class TrackViewHolder(private val binding: SearchGridItemBinding) :
@@ -22,6 +25,10 @@ class GridRVAdapter(
                     binding.textAlbumOrTrackTitle.text = item.track_title
                     binding.textArtistName.text = item.artist_name
                     itemView.setOnClickListener { onItemClick(item) }
+                    itemView.setOnLongClickListener {
+                        onLongPress(item)
+                        true
+                    }
                 }
 
                 is Album -> {

@@ -60,6 +60,10 @@ class AlbumDetailsFragment : Fragment() {
         SharedFunctions.loadImageFromUrl(binding.albumCoverImage, album.album_image)
         binding.albumTitle.text = album.album_title
         binding.albumArtist.text = album.artist_name
+        binding.toolbar.title = album.album_title
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun setGridRv() {

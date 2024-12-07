@@ -8,23 +8,43 @@
     tools:context=".ui.details.album.AlbumDetailsFragment">
 
 
-    <!-- Album Cover Image -->
-    <ImageView
-        android:id="@+id/albumCoverImage"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:contentDescription="Album Cover Image"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background" />
+        android:layout_height="wrap_content"
+        android:titleTextColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/arrow_back"
+        app:title="Album Name" />
+
+    <!-- Album Cover Image -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="18dp"
+        android:elevation="12dp"
+        app:cardCornerRadius="12dp">
+
+        <ImageView
+            android:id="@+id/albumCoverImage"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:contentDescription="Album Cover Image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" />
+    </androidx.cardview.widget.CardView>
+
 
     <!-- Album Title -->
     <TextView
         android:id="@+id/albumTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:paddingHorizontal="8dp"
         android:text="Album Title"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold" />
 
@@ -33,9 +53,9 @@
         android:id="@+id/albumArtist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:paddingHorizontal="8dp"
         android:text="Artist Name"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <!-- RecyclerView for Tracks in the Album -->
@@ -43,9 +63,9 @@
         android:id="@+id/recyclerViewTracks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="12dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:layout_marginTop="12dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </LinearLayout>
