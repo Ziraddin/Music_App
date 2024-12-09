@@ -16,7 +16,7 @@ class PlaylistRVAdapter(
     private var playlists: List<Playlist>,
     private val onPlaylistClick: ((Playlist) -> Unit)? = null,
     private val onPlaylistSelected: ((Playlist) -> Unit)? = null,
-    private val onOptionSelected: (Playlist, String) -> Unit,
+    private val onOptionSelected: ((Playlist, String) -> Unit)? = null,
 ) : RecyclerView.Adapter<PlaylistRVAdapter.PlaylistViewHolder>() {
 
     inner class PlaylistViewHolder(private val binding: PlaylistItemBinding) :
@@ -41,10 +41,10 @@ class PlaylistRVAdapter(
                 binding.root.setOnClickListener {
                     onPlaylistClick!!(playlist)
                 }
-            }
-
-            binding.playlistOptions.setOnClickListener {
-                showBottomSheet(binding.root.context, playlist)
+            } else if (onOptionSelected != null) {
+                binding.playlistOptions.setOnClickListener {
+                    showBottomSheet(binding.root.context, playlist)
+                }
             }
         }
     }
@@ -56,12 +56,12 @@ class PlaylistRVAdapter(
 
         binding.optionEdit.setOnClickListener {
             bottomSheet.dismiss()
-            onOptionSelected(playlist, "Edit")
+            onOptionSelected?.let { it -> it(playlist, "Edit") }
         }
 
         binding.optionDelete.setOnClickListener {
             bottomSheet.dismiss()
-            onOptionSelected(playlist, "Delete")
+            onOptionSelected?.let { it -> it(playlist, "Delete") }
         }
 
         bottomSheet.show()

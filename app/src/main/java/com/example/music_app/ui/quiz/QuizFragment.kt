@@ -36,6 +36,7 @@ class QuizFragment : Fragment() {
 
         setGridRv()
         createPlaylist()
+        viewModel.getQuizzes()
         observeQuizState()
 
         return binding.root
@@ -97,6 +98,7 @@ class QuizFragment : Fragment() {
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         val confirmButton = binding.btnDelete
         val cancelButton = binding.btnCancel
+        binding.tvDeleteMessage.text = "Are you sure you want to\ndelete this Quiz?"
 
         cancelButton.setOnClickListener {
             dialog.dismiss()

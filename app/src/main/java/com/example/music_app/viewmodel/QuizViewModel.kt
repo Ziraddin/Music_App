@@ -3,7 +3,6 @@ package com.example.music_app.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.music_app.ui.quiz.Question
 import com.example.music_app.ui.quiz.Quiz
 import kotlinx.coroutines.launch
 
@@ -72,39 +71,4 @@ class QuizViewModel : ViewModel() {
         }
     }
 
-    fun addQuestionToQuiz(question: Question, quizId: Int) {
-        _quizState.value = QuizState.Loading
-        viewModelScope.launch {
-            try {
-                val index = quizzes.indexOfFirst { it.id == quizId }
-                if (index != -1) {
-                    val quiz = quizzes[index]
-                    quiz.questions.add(question)
-                    _quizState.value = QuizState.Success(quizzes)
-                } else {
-                    _quizState.value = QuizState.Error("Quiz not found")
-                }
-            } catch (e: Exception) {
-                _quizState.value = QuizState.Error("Failed to add question: ${e.message}")
-            }
-        }
-    }
-
-    fun removeQuestionFromQuiz(question: Question, quizId: Int) {
-        _quizState.value = QuizState.Loading
-        viewModelScope.launch {
-            try {
-                val index = quizzes.indexOfFirst { it.id == quizId }
-                if (index != -1) {
-                    val quiz = quizzes[index]
-                    quiz.questions.remove(question)
-                    _quizState.value = QuizState.Success(quizzes)
-                } else {
-                    _quizState.value = QuizState.Error("Quiz not found")
-                }
-            } catch (e: Exception) {
-                _quizState.value = QuizState.Error("Failed to remove question: ${e.message}")
-            }
-        }
-    }
 }

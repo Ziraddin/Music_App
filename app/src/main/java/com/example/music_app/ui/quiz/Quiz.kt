@@ -7,16 +7,18 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Quiz(
-    val id: Int,
+    val id: Int = System.currentTimeMillis().toInt(),
     var name: String,
     var associatedPlaylists: List<Playlist>,
-    val questions: MutableList<Question> = mutableListOf(),
+    val questions: List<Question> = listOf(),
     var timeLimit: Long
 ) : Parcelable
 
 @Parcelize
 data class Question(
-    val id: Int, val questionText: String,
+    val id: Int = System.currentTimeMillis().toInt(),
+    val questionText: String,
+    val trackPreview: String,
     val options: List<String>,
     val correctAnswer: String,
 ) : Parcelable

@@ -12,7 +12,7 @@
         android:id="@+id/tvDeleteMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Are you sure you want to\ndelete this playlist?"
+        android:text="Are you sure you want to\ndelete this Playlist?"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/error_red"
