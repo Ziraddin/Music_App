@@ -44,7 +44,22 @@
         android:id="@+id/quizFragment"
         android:name="com.example.music_app.ui.quiz.QuizFragment"
         android:label="fragment_quiz"
-        tools:layout="@layout/fragment_quiz" />
+        tools:layout="@layout/fragment_quiz" >
+        <action
+            android:id="@+id/action_quizFragment_to_quizDetailsFragment"
+            app:destination="@id/quizDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_quizFragment_to_createQuizFragment"
+            app:destination="@id/createQuizFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/albumDetailsFragment"
@@ -88,6 +103,20 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
+    <fragment
+        android:id="@+id/quizDetailsFragment"
+        android:name="com.example.music_app.ui.details.quiz.QuizDetailsFragment"
+        android:label="fragment_quiz_details"
+        tools:layout="@layout/fragment_quiz_details" >
+        <argument
+            android:name="quiz"
+            app:argType="com.example.music_app.ui.quiz.Quiz" />
+    </fragment>
+    <fragment
+        android:id="@+id/createQuizFragment"
+        android:name="com.example.music_app.ui.quiz.CreateQuizFragment"
+        android:label="fragment_create_quiz"
+        tools:layout="@layout/fragment_create_quiz" />
 
 </navigation>
 

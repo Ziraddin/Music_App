@@ -13,14 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
-        android:elevation="12dp"
-        app:cardBackgroundColor="@color/white"
+        android:elevation="6dp"
         app:cardCornerRadius="12dp"
         app:layout_constraintEnd_toStartOf="@id/btn_search"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/spotify_green"
-        app:strokeWidth="2dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_bar"
@@ -63,14 +60,32 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:checked="true"
-            android:text="Tracks" />
+            android:text="Tracks"
+            app:buttonTint="@color/spotify_green" />
 
         <RadioButton
             android:id="@+id/albums"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Albums" />
+            android:text="Albums"
+            app:buttonTint="@color/spotify_green" />
     </RadioGroup>
+
+
+    <com.lottiefiles.dotlottie.core.widget.DotLottieAnimation
+        android:id="@+id/lottie_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        app:dotLottie_loop="true"
+        app:dotLottie_speed="1"
+        app:dotLottie_src="@raw/nothing_here"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <!-- RecyclerView to display results -->
     <androidx.recyclerview.widget.RecyclerView

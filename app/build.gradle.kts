@@ -77,4 +77,7 @@ dependencies {
     implementation("androidx.media3:media3-exoplayer:1.4.0")
     implementation("androidx.media3:media3-ui:1.4.0")
 
+    //Lottie Animations
+    implementation("com.github.LottieFiles:dotlottie-android:0.4.1")
+
 }

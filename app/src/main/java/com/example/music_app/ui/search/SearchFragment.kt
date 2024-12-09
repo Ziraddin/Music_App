@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.music_app.R
@@ -31,7 +32,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private val viewModelSearch: SearchViewModel by viewModels()
-    private val viewModelPlaylist: PlaylistViewModel by viewModels()
+    private val viewModelPlaylist: PlaylistViewModel by activityViewModels()
     private var data: List<Any> = emptyList()
     private lateinit var rvAdapter: GridRVAdapter
 
@@ -56,25 +57,33 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun observeResults() {
         viewModelSearch.searchState.observe(viewLifecycleOwner) { response ->
             if (response is SearchState.Success) {
-                when (binding.searchOptions.checkedRadioButtonId) {
-                    R.id.tracks -> {
-                        val tracks =
-                            Converter.convertTrackRToTracks(response.result as List<TrackR>)
-                        println("Observed data: $tracks")
-                        rvAdapter.updateData(tracks)
-                    }
+                val dataList = when (binding.searchOptions.checkedRadioButtonId) {
+                    R.id.tracks -> Converter.convertTrackRToTracks(response.result as List<TrackR>)
+                    R.id.albums -> Converter.convertAlbumRToAlbums(response.result as List<AlbumR>)
+                    else -> emptyList()
+                }
 
-                    R.id.albums -> {
-                        val albums =
-                            Converter.convertAlbumRToAlbums(response.result as List<AlbumR>)
-                        println("Observed data: $albums")
-                        rvAdapter.updateData(albums)
-                    }
+                if (dataList.isEmpty()) {
+                    showLottieAnimation()
+                } else {
+                    rvAdapter.updateData(dataList)
+                    showRecyclerView()
                 }
             } else if (response is SearchState.Error) {
                 println("Error: ${response.message}")
+                showLottieAnimation()
             }
         }
+    }
+
+    private fun showLottieAnimation() {
+        binding.lottieView.visibility = View.VISIBLE
+        binding.recyclerViewResults.visibility = View.GONE
+    }
+
+    private fun showRecyclerView() {
+        binding.lottieView.visibility = View.GONE
+        binding.recyclerViewResults.visibility = View.VISIBLE
     }
 
 

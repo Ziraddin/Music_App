@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.music_app.databinding.DialogConfirmDeleteBinding
 import com.example.music_app.databinding.DialogCreatePlaylistBinding
@@ -21,7 +21,7 @@ class PlaylistFragment : Fragment() {
     private var _binding: FragmentPlaylistBinding? = null
     private val binding get() = _binding!!
     private lateinit var rvAdapter: PlaylistRVAdapter
-    private val viewModel: PlaylistViewModel by viewModels()
+    private val viewModel: PlaylistViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -29,7 +29,7 @@ class PlaylistFragment : Fragment() {
         _binding = FragmentPlaylistBinding.inflate(inflater, container, false)
         rvAdapter = PlaylistRVAdapter(
             emptyList(),
-            onPlaylistClick = ::onTrackClick,
+            onPlaylistClick = ::onPlaylistClick,
             onOptionSelected = ::onOptionSelected,
         )
 
@@ -57,13 +57,13 @@ class PlaylistFragment : Fragment() {
         })
     }
 
-    //Dialogs
     private fun createPlaylist() {
         binding.createPlaylistButton.setOnClickListener {
             showCreatePlaylistDialog()
         }
     }
 
+    //Dialogs
     private fun showCreatePlaylistDialog() {
         val binding = DialogCreatePlaylistBinding.inflate(layoutInflater)
         val dialog = Dialog(requireContext())
@@ -149,7 +149,7 @@ class PlaylistFragment : Fragment() {
         binding.recyclerViewPlaylists.adapter = rvAdapter
     }
 
-    private fun onTrackClick(playlist: Playlist) {
+    private fun onPlaylistClick(playlist: Playlist) {
         val navController = findNavController()
         val action =
             PlaylistFragmentDirections.actionPlaylistFragmentToPlaylistDetailsFragment(playlist)

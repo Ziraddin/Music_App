@@ -18,8 +18,7 @@ class PlaylistViewModel : ViewModel() {
     private val _playlistState = MutableLiveData<PlaylistState>(PlaylistState.Idle)
     val playlistState: MutableLiveData<PlaylistState> = this._playlistState
 
-    private val playlists =
-        mutableListOf<Playlist>()
+    private val playlists = mutableListOf<Playlist>()
 
     fun getPlaylists() {
         _playlistState.value = PlaylistState.Loading
@@ -81,8 +80,13 @@ class PlaylistViewModel : ViewModel() {
             try {
                 val index = playlists.indexOfFirst { it.id == selectedPlaylist.id }
                 if (index != -1) {
-                    playlists[index].tracks.add(track)
+                    val playlist = playlists[index]
+                    playlist.apply {
+                        tracks.add(track)
+                        trackCount = tracks.size
+                    }
                     _playlistState.value = PlaylistState.Success(playlists)
+                    println("track added: $track to $selectedPlaylist")
                 } else {
                     _playlistState.value = PlaylistState.Error("Playlist not found")
                 }

@@ -11,5 +11,5 @@ data class Playlist(
     val id: Int = Random.nextInt(),
     var name: String,
     var trackCount: Int = 0,
-    var tracks: MutableList<Track> = mutableListOf()
+    val tracks: MutableList<Track> = mutableListOf()
 ) : Parcelable

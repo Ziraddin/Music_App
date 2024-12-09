@@ -7,25 +7,24 @@
     tools:context=".ui.playlist.PlaylistFragment">
 
 
-    <!-- Title -->
     <TextView
         android:id="@+id/playlist_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Playlists"
-        android:textSize="24sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewPlaylists"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- RecyclerView to display the playlists -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPlaylists"
         android:layout_width="0dp"
-        android:layout_marginTop="24dp"
         android:layout_height="0dp"
+        android:layout_marginTop="24dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,13 +32,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playlist_title" />
 
-    <!-- Button to create a new playlist -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/createPlaylistButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="24dp"
         android:backgroundTint="@color/spotify_green"
         android:clickable="true"
         android:src="@drawable/add_icon"
