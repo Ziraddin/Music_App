@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.music_app.databinding.FragmentPlaylistDetailsBinding
 import com.example.music_app.ui.details.album.adapter.TrackRVAdapter
+import com.example.music_app.ui.main.MainActivity
 import com.example.music_app.ui.playlist.Playlist
 import com.example.music_app.ui.search.data.Track
 import com.example.music_app.viewmodel.PlaylistViewModel
@@ -20,13 +21,14 @@ class PlaylistDetailsFragment : Fragment() {
     private var _binding: FragmentPlaylistDetailsBinding? = null
     private val binding get() = _binding!!
     private val args: PlaylistDetailsFragmentArgs by navArgs()
-    private val viewModel: PlaylistViewModel by activityViewModels()
+    private lateinit var playlistViewModel: PlaylistViewModel
     private lateinit var rvAdapter: TrackRVAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPlaylistDetailsBinding.inflate(inflater, container, false)
+        playlistViewModel = (activity as MainActivity).playlistViewModel
 
         val playlist: Playlist = args.playlist
         rvAdapter = TrackRVAdapter(playlist.tracks, ::onTrackClick)

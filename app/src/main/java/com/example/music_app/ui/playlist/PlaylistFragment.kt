@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.music_app.databinding.DialogConfirmDeleteBinding
 import com.example.music_app.databinding.DialogCreatePlaylistBinding
 import com.example.music_app.databinding.DialogUpdatePlaylistBinding
 import com.example.music_app.databinding.FragmentPlaylistBinding
+import com.example.music_app.ui.main.MainActivity
 import com.example.music_app.ui.playlist.adapter.PlaylistRVAdapter
 import com.example.music_app.viewmodel.PlaylistState
 import com.example.music_app.viewmodel.PlaylistViewModel
@@ -21,18 +21,19 @@ class PlaylistFragment : Fragment() {
     private var _binding: FragmentPlaylistBinding? = null
     private val binding get() = _binding!!
     private lateinit var rvAdapter: PlaylistRVAdapter
-    private val viewModel: PlaylistViewModel by activityViewModels()
+    private lateinit var playlistViewModel: PlaylistViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPlaylistBinding.inflate(inflater, container, false)
+        playlistViewModel = (activity as MainActivity).playlistViewModel
         rvAdapter = PlaylistRVAdapter(
             emptyList(),
             onPlaylistClick = ::onPlaylistClick,
             onOptionSelected = ::onOptionSelected,
         )
-
+        playlistViewModel.getPlaylists()
         setGridRv()
         createPlaylist()
         observePlaylistState()
@@ -42,7 +43,7 @@ class PlaylistFragment : Fragment() {
 
 
     private fun observePlaylistState() {
-        viewModel.playlistState.observe(viewLifecycleOwner, { state ->
+        playlistViewModel.playlistState.observe(viewLifecycleOwner, { state ->
             when (state) {
                 is PlaylistState.Success -> {
                     rvAdapter.updateData(state.result)
@@ -82,7 +83,7 @@ class PlaylistFragment : Fragment() {
 
             if (playlistName.isNotEmpty()) {
                 val newPlaylist = Playlist(name = playlistName)
-                viewModel.addPlaylist(newPlaylist)
+                playlistViewModel.addPlaylist(newPlaylist)
                 dialog.dismiss()
             } else {
                 Toast.makeText(requireContext(), "Playlist name is required", Toast.LENGTH_SHORT)
@@ -106,7 +107,7 @@ class PlaylistFragment : Fragment() {
         }
 
         confirmButton.setOnClickListener {
-            viewModel.removePlaylist(playlist)
+            playlistViewModel.removePlaylist(playlist)
             Toast.makeText(requireContext(), "Playlist deleted", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
@@ -135,7 +136,7 @@ class PlaylistFragment : Fragment() {
                 playlistNameEditText.error = "Name is required"
             } else {
                 playlist.name = newName
-                viewModel.updatePlaylist(playlist)
+                playlistViewModel.updatePlaylist(playlist)
                 Toast.makeText(requireContext(), "Playlist updated", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
             }

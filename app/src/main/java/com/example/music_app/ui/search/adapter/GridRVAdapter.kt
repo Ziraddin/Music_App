@@ -36,6 +36,7 @@ class GridRVAdapter(
                     binding.textAlbumOrTrackTitle.text = item.album_title
                     binding.textArtistName.text = item.artist_name
                     itemView.setOnClickListener { onItemClick(item) }
+                    itemView.setOnLongClickListener(null)
                 }
             }
         }

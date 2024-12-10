@@ -1,6 +1,7 @@
 package com.example.music_app.ui.quiz
 
 import android.os.Parcelable
+import com.example.music_app.data.local.entity.QuizEntity
 import com.example.music_app.ui.playlist.Playlist
 import kotlinx.parcelize.Parcelize
 
@@ -22,3 +23,14 @@ data class Question(
     val options: List<String>,
     val correctAnswer: String,
 ) : Parcelable
+
+fun Quiz.toQuizEntity(): QuizEntity {
+    return QuizEntity(
+        id = this.id,
+        name = this.name,
+        associatedPlaylist = this.associatedPlaylists,
+        questions = this.questions,
+        timeLimit = this.timeLimit
+    )
+}
+

@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.music_app.R
 import com.example.music_app.databinding.FragmentCreateQuizBinding
+import com.example.music_app.ui.main.MainActivity
 import com.example.music_app.ui.playlist.Playlist
 import com.example.music_app.ui.playlist.adapter.PlaylistRVAdapter
 import com.example.music_app.ui.search.data.Track
@@ -22,8 +22,8 @@ import com.google.android.material.chip.Chip
 class CreateQuizFragment : Fragment() {
     private var _binding: FragmentCreateQuizBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: QuizViewModel by activityViewModels()
-    private val playlistViewModel: PlaylistViewModel by activityViewModels()
+    private lateinit var quizViewModel: QuizViewModel
+    private lateinit var playlistViewModel: PlaylistViewModel
     private val selectedPlaylists = mutableSetOf<Playlist>()
     private lateinit var rvAdapter: PlaylistRVAdapter
 
@@ -31,6 +31,8 @@ class CreateQuizFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCreateQuizBinding.inflate(inflater, container, false)
+        quizViewModel = (activity as MainActivity).quizViewModel
+        playlistViewModel = (activity as MainActivity).playlistViewModel
         rvAdapter = PlaylistRVAdapter(emptyList(), onPlaylistSelected = ::onPlaylistSelected)
         playlistViewModel.getPlaylists()
 
@@ -91,7 +93,7 @@ class CreateQuizFragment : Fragment() {
         if (dynamicChip != null) {
             dynamicChip.text = totalTracks.toString()
             dynamicChip.visibility =
-                if (totalTracks > 0 && !chips.contains(totalTracks)) View.VISIBLE else View.GONE
+                if (totalTracks >= 3 && !chips.contains(totalTracks)) View.VISIBLE else View.GONE
         }
     }
 
@@ -118,7 +120,7 @@ class CreateQuizFragment : Fragment() {
                 associatedPlaylists = selectedPlaylists.toList()
             )
 
-            viewModel.addQuiz(newQuiz)
+            quizViewModel.addQuiz(newQuiz)
             Toast.makeText(requireContext(), "Quiz Created!", Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()
         }

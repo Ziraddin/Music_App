@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.example.music_app.databinding.FragmentQuizChallangeBinding
 import com.example.music_app.databinding.ItemQuestionCardBinding
 import com.example.music_app.ui.details.track.MusicController
+import com.example.music_app.ui.main.MainActivity
 import com.example.music_app.ui.quiz.adapter.QuestionAdapter
 import com.example.music_app.viewmodel.QuizViewModel
 
@@ -23,12 +23,13 @@ class QuizChallangeFragment : Fragment() {
     private val args: QuizChallangeFragmentArgs by navArgs()
     private lateinit var viewPager: ViewPager2
     private lateinit var questionAdapter: QuestionAdapter
-    private val viewModel: QuizViewModel by activityViewModels()
+    private lateinit var quizViewModel: QuizViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentQuizChallangeBinding.inflate(inflater, container, false)
+        quizViewModel = (activity as MainActivity).quizViewModel
         val quiz: Quiz = args.quiz
         viewPager = binding.viewPager
         questionAdapter = QuestionAdapter(quiz.questions, onNextQuestion = {

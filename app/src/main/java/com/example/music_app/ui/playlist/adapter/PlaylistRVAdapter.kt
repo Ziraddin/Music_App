@@ -21,30 +21,29 @@ class PlaylistRVAdapter(
 
     inner class PlaylistViewHolder(private val binding: PlaylistItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        var selected: Boolean = false
         fun bind(playlist: Playlist) {
             binding.playlistName.text = playlist.name
             binding.playlistTrackCount.text =
                 String.format(Locale.ROOT, "Tracks: %d", playlist.trackCount)
 
+            var selected: Boolean = false
             if (onPlaylistSelected != null) {
                 binding.root.setOnClickListener {
+                    onPlaylistSelected!!(playlist)
                     if (!selected) {
                         binding.playlistName.setTextColor(binding.root.context.getColor(R.color.spotify_green))
                     } else {
                         binding.playlistName.setTextColor(binding.root.context.getColor(R.color.black))
                     }
                     selected = !selected
-                    onPlaylistSelected!!(playlist)
                 }
             } else if (onPlaylistClick != null) {
                 binding.root.setOnClickListener {
                     onPlaylistClick!!(playlist)
                 }
-            } else if (onOptionSelected != null) {
-                binding.playlistOptions.setOnClickListener {
-                    showBottomSheet(binding.root.context, playlist)
-                }
+            }
+            binding.playlistOptions.setOnClickListener {
+                showBottomSheet(binding.root.context, playlist)
             }
         }
     }
@@ -56,12 +55,12 @@ class PlaylistRVAdapter(
 
         binding.optionEdit.setOnClickListener {
             bottomSheet.dismiss()
-            onOptionSelected?.let { it -> it(playlist, "Edit") }
+            onOptionSelected?.let { it1 -> it1(playlist, "Edit") }
         }
 
         binding.optionDelete.setOnClickListener {
             bottomSheet.dismiss()
-            onOptionSelected?.let { it -> it(playlist, "Delete") }
+            onOptionSelected?.let { it1 -> it1(playlist, "Delete") }
         }
 
         bottomSheet.show()

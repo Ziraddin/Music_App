@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.music_app.core.constants.SharedFunctions
 import com.example.music_app.databinding.TrackItemBinding
 import com.example.music_app.ui.search.data.Track
+import kotlin.reflect.KFunction1
 
 class TrackRVAdapter(
     private var trackList: List<Track>,
     private val onTrackClick: (Track) -> Unit,
+    private val onLongPress: KFunction1<Track, Unit>? = null,
 ) : RecyclerView.Adapter<TrackRVAdapter.TrackViewHolder>() {
 
     inner class TrackViewHolder(private val binding: TrackItemBinding) :
@@ -22,6 +24,11 @@ class TrackRVAdapter(
 
             itemView.setOnClickListener {
                 onTrackClick(track)
+            }
+
+            itemView.setOnLongClickListener {
+                onLongPress?.let { it1 -> it1(track) }
+                true
             }
         }
     }

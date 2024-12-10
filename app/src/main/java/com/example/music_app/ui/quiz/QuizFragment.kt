@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.music_app.databinding.DialogConfirmDeleteBinding
 import com.example.music_app.databinding.DialogUpdatePlaylistBinding
 import com.example.music_app.databinding.FragmentQuizBinding
+import com.example.music_app.ui.main.MainActivity
 import com.example.music_app.ui.quiz.adapter.QuizRVAdapter
 import com.example.music_app.viewmodel.QuizState
 import com.example.music_app.viewmodel.QuizViewModel
@@ -21,12 +21,13 @@ class QuizFragment : Fragment() {
     private var _binding: FragmentQuizBinding? = null
     private val binding get() = _binding!!
     private lateinit var rvAdapter: QuizRVAdapter
-    private val viewModel: QuizViewModel by activityViewModels()
+    private lateinit var quizViewModel: QuizViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentQuizBinding.inflate(inflater, container, false)
+        quizViewModel = (activity as MainActivity).quizViewModel
 
         rvAdapter = QuizRVAdapter(
             emptyList(),
@@ -36,7 +37,7 @@ class QuizFragment : Fragment() {
 
         setGridRv()
         createPlaylist()
-        viewModel.getQuizzes()
+        quizViewModel.getQuizzes()
         observeQuizState()
 
         return binding.root
@@ -44,7 +45,7 @@ class QuizFragment : Fragment() {
 
 
     private fun observeQuizState() {
-        viewModel.quizState.observe(viewLifecycleOwner, { state ->
+        quizViewModel.quizState.observe(viewLifecycleOwner, { state ->
             when (state) {
                 is QuizState.Success -> {
                     rvAdapter.updateData(state.result)
@@ -105,7 +106,7 @@ class QuizFragment : Fragment() {
         }
 
         confirmButton.setOnClickListener {
-            viewModel.removeQuiz(quiz)
+            quizViewModel.removeQuiz(quiz)
             Toast.makeText(requireContext(), "Quiz deleted", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
         }
@@ -134,7 +135,7 @@ class QuizFragment : Fragment() {
                 quizNameEditText.error = "Name is required"
             } else {
                 quiz.name = newName
-                viewModel.updateQuiz(quiz)
+                quizViewModel.updateQuiz(quiz)
                 Toast.makeText(requireContext(), "Quiz updated", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
             }
