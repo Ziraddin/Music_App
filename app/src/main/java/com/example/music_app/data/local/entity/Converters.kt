@@ -2,7 +2,7 @@ package com.example.music_app.data.local.entity
 
 import androidx.room.TypeConverter
 import com.example.music_app.ui.playlist.Playlist
-import com.example.music_app.ui.quiz.Question
+import com.example.music_app.ui.quiz.data.Question
 import com.example.music_app.ui.search.data.Track
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

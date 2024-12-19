@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.music_app.data.local.entity.toQuiz
 import com.example.music_app.data.repository.MusicRepository
-import com.example.music_app.ui.quiz.Quiz
-import com.example.music_app.ui.quiz.toQuizEntity
+import com.example.music_app.ui.quiz.data.Quiz
+import com.example.music_app.ui.quiz.data.toQuizEntity
 import kotlinx.coroutines.launch
 
 sealed class QuizState {

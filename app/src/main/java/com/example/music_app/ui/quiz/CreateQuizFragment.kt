@@ -12,6 +12,8 @@ import com.example.music_app.databinding.FragmentCreateQuizBinding
 import com.example.music_app.ui.main.MainActivity
 import com.example.music_app.ui.playlist.Playlist
 import com.example.music_app.ui.playlist.adapter.PlaylistRVAdapter
+import com.example.music_app.ui.quiz.data.Question
+import com.example.music_app.ui.quiz.data.Quiz
 import com.example.music_app.ui.search.data.Track
 import com.example.music_app.viewmodel.PlaylistState
 import com.example.music_app.viewmodel.PlaylistViewModel
@@ -112,7 +114,7 @@ class CreateQuizFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val timeLimit = selectedTimeChip.text.toString().toLong()
+            val timeLimit = selectedTimeChip.text.toString().toLong() * 1000
             val newQuiz = Quiz(
                 name = quizName,
                 questions = generateQuestions(selectedQuestionsChip.text.toString().toInt()),

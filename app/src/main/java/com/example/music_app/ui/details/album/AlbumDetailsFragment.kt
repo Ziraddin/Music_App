@@ -96,7 +96,8 @@ class AlbumDetailsFragment : Fragment() {
                 for (trackR in response.result as List<TrackR>) {
                     trackR.artist.picture_big = album.artist_image
                 }
-                album.tracks = RemoteToLocalConv.convertTrackRToTracks(response.result as List<TrackR>)
+                album.tracks =
+                    RemoteToLocalConv.convertTrackRToTracks(response.result as List<TrackR>)
                 rvAdapter.updateData(album.tracks)
             } else if (response is SearchState.Error) {
                 println("Error: ${response.message}")

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.music_app.databinding.QuizItemBinding
 import com.example.music_app.databinding.QuizOptionsBottomSheetBinding
-import com.example.music_app.ui.quiz.Quiz
+import com.example.music_app.ui.quiz.data.Quiz
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.Locale
 

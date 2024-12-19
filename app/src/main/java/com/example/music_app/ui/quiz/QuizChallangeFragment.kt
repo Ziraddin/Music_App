@@ -9,12 +9,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.example.music_app.databinding.FragmentQuizChallangeBinding
-import com.example.music_app.databinding.ItemQuestionCardBinding
 import com.example.music_app.ui.details.track.MusicController
 import com.example.music_app.ui.main.MainActivity
 import com.example.music_app.ui.quiz.adapter.QuestionAdapter
+import com.example.music_app.ui.quiz.data.Quiz
 import com.example.music_app.viewmodel.QuizViewModel
-
 
 class QuizChallangeFragment : Fragment() {
 
@@ -25,6 +24,7 @@ class QuizChallangeFragment : Fragment() {
     private lateinit var questionAdapter: QuestionAdapter
     private lateinit var quizViewModel: QuizViewModel
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -32,14 +32,12 @@ class QuizChallangeFragment : Fragment() {
         quizViewModel = (activity as MainActivity).quizViewModel
         val quiz: Quiz = args.quiz
         viewPager = binding.viewPager
-        questionAdapter = QuestionAdapter(quiz.questions, onNextQuestion = {
-            viewPager.currentItem += 1
-            if (viewPager.currentItem + 1 == quiz.questions.size) {
-                val binding = ItemQuestionCardBinding.inflate(layoutInflater)
-                binding.actionButton.text = "Finish"
-                findNavController().navigateUp()
-            }
-        })
+        questionAdapter = QuestionAdapter(
+            quiz.questions,
+            onNextQuestion = ::onNextQuestion,
+            timeLimit = quiz.timeLimit,
+            onFinishQuiz = ::onFinishQuiz,
+        )
 
         bindData(quiz)
         setupViewPager(quiz)
@@ -75,9 +73,20 @@ class QuizChallangeFragment : Fragment() {
         MusicController.playPreview()
     }
 
+
+    private fun onNextQuestion() {
+        viewPager.currentItem += 1
+    }
+
+    private fun onFinishQuiz() {
+        findNavController().navigateUp()
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         MusicController.stop()
         _binding = null
     }
 }
+

@@ -110,7 +110,7 @@
         tools:layout="@layout/fragment_quiz_details" >
         <argument
             android:name="quiz"
-            app:argType="com.example.music_app.ui.quiz.Quiz" />
+            app:argType="com.example.music_app.ui.quiz.data.Quiz" />
         <action
             android:id="@+id/action_quizDetailsFragment_to_quizChallangeFragment"
             app:destination="@id/quizChallangeFragment"
@@ -131,7 +131,7 @@
         tools:layout="@layout/fragment_quiz_challange" >
         <argument
             android:name="quiz"
-            app:argType="com.example.music_app.ui.quiz.Quiz" />
+            app:argType="com.example.music_app.ui.quiz.data.Quiz" />
     </fragment>
 
 </navigation>

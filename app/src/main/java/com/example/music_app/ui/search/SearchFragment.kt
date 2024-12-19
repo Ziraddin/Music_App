@@ -200,8 +200,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         binding.searchBar.clearFocus()
     }
 
-    private fun setSearchView() {}
-
     private fun setGridRv(rvAdapter: GridRVAdapter) {
         binding.recyclerViewResults.adapter = rvAdapter
     }

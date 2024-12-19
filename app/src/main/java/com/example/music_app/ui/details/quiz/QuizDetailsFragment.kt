@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.music_app.databinding.FragmentQuizDetailsBinding
 import com.example.music_app.ui.main.MainActivity
 import com.example.music_app.ui.playlist.adapter.PlaylistRVAdapter
-import com.example.music_app.ui.quiz.Quiz
+import com.example.music_app.ui.quiz.data.Quiz
 import com.example.music_app.viewmodel.PlaylistViewModel
 import com.example.music_app.viewmodel.QuizViewModel
 

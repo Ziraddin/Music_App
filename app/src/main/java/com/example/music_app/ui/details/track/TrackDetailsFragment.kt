@@ -1,6 +1,7 @@
 package com.example.music_app.ui.details.track
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class TrackDetailsFragment : Fragment() {
 
         val track: Track = args.track
         bindData(track)
+        Log.e("TrackDetailsFragment", "Track: ${track.preview}")
         MusicController.setMediaItem(requireContext(), track.preview)
         MusicController.setVolume(1f)
         playMusic()

@@ -13,6 +13,7 @@ import com.example.music_app.databinding.DialogUpdatePlaylistBinding
 import com.example.music_app.databinding.FragmentQuizBinding
 import com.example.music_app.ui.main.MainActivity
 import com.example.music_app.ui.quiz.adapter.QuizRVAdapter
+import com.example.music_app.ui.quiz.data.Quiz
 import com.example.music_app.viewmodel.QuizState
 import com.example.music_app.viewmodel.QuizViewModel
 

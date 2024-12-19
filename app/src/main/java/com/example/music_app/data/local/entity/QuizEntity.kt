@@ -3,8 +3,8 @@ package com.example.music_app.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.music_app.ui.playlist.Playlist
-import com.example.music_app.ui.quiz.Question
-import com.example.music_app.ui.quiz.Quiz
+import com.example.music_app.ui.quiz.data.Question
+import com.example.music_app.ui.quiz.data.Quiz
 
 
 @Entity(tableName = "quizzes")
