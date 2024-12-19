@@ -12,7 +12,7 @@
 
 
     <color name="button_pressed">#14833B</color>
-    <color name="button_disabled">#2E2E2E</color>
+    <color name="button_disabled">#80A6A5A5</color>
 
     <color name="error_red">#E22134</color>
     <color name="spotify_transparent_black">#80000000</color>

@@ -3,7 +3,7 @@ package com.example.music_app.ui.details.album.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.music_app.core.constants.SharedFunctions
+import com.example.music_app.core.SharedFunctions
 import com.example.music_app.databinding.TrackItemBinding
 import com.example.music_app.ui.search.data.Track
 import kotlin.reflect.KFunction1

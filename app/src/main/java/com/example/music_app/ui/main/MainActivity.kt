@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.music_app.R
-import com.example.music_app.core.database.AppDatabase
+import com.example.music_app.data.local.database.AppDatabase
 import com.example.music_app.data.repository.MusicRepository
 import com.example.music_app.databinding.ActivityMainBinding
 import com.example.music_app.viewmodel.PlaylistViewModel
@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(view)
 
-        //Initialize app database and repository
+        //App database and Repository
         val database = AppDatabase.getDatabase(applicationContext)
         musicRepository = MusicRepository(database)
 
-        //Initialize Viewmodels
+        //Viewmodels
         quizViewModel = QuizViewModel(musicRepository)
         playlistViewModel = PlaylistViewModel(musicRepository)
 

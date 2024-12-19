@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.music_app.R
-import com.example.music_app.core.constants.SharedFunctions
+import com.example.music_app.core.SharedFunctions
 import com.example.music_app.databinding.FragmentTrackDetailsBinding
 import com.example.music_app.ui.search.data.Track
 import kotlinx.coroutines.delay

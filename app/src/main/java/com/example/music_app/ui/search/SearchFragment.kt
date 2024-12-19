@@ -1,5 +1,6 @@
 package com.example.music_app.ui.search
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.music_app.R
-import com.example.music_app.core.constants.Converter
+import com.example.music_app.core.RemoteToLocalConv
 import com.example.music_app.data.remote.model.AlbumR
 import com.example.music_app.data.remote.model.TrackR
 import com.example.music_app.databinding.BottomSheetSelectPlaylistBinding
@@ -21,12 +22,15 @@ import com.example.music_app.ui.playlist.Playlist
 import com.example.music_app.ui.playlist.adapter.PlaylistRVAdapter
 import com.example.music_app.ui.search.adapter.GridRVAdapter
 import com.example.music_app.ui.search.data.Album
+import com.example.music_app.ui.search.data.SearchItem
 import com.example.music_app.ui.search.data.Track
 import com.example.music_app.viewmodel.PlaylistState
 import com.example.music_app.viewmodel.PlaylistViewModel
 import com.example.music_app.viewmodel.SearchState
 import com.example.music_app.viewmodel.SearchViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
@@ -34,18 +38,28 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private val binding get() = _binding!!
     private val viewModelSearch: SearchViewModel by viewModels()
     private lateinit var playlistViewModel: PlaylistViewModel
-    private var data: List<Any> = emptyList()
     private lateinit var rvAdapter: GridRVAdapter
     private lateinit var playlistRVAdapter: PlaylistRVAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var pressedTrack: Track
+    private var data = mutableMapOf<String, List<SearchItem>>(
+        "tracks" to emptyList<Track>(), "albums" to emptyList<Album>()
+    )
+    private val sharedPreferences by lazy {
+        requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        loadSearchCache()
+        rvAdapter = GridRVAdapter(data["tracks"]!!, ::onItemClick, ::onLongPress)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         playlistViewModel = (activity as MainActivity).playlistViewModel
-        rvAdapter = GridRVAdapter(data, ::onItemClick, ::onLongPress)
         playlistRVAdapter =
             PlaylistRVAdapter(emptyList(), onPlaylistSelected = ::onPlaylistSelected)
         bottomSheetDialog = createBottomSheet()
@@ -54,6 +68,36 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         search()
 
         return binding.root
+    }
+
+
+    private fun saveSearchData(searchData: List<SearchItem>) {
+        val jsonData = Json.encodeToString(searchData)
+
+        if (searchData.all { it is Track }) {
+            sharedPreferences.edit().putString("searchCacheTrack", jsonData).apply()
+        } else {
+            sharedPreferences.edit().putString("searchCacheAlbum", jsonData).apply()
+        }
+    }
+
+    private fun loadSearchCache() {
+        val jsonDataAlbum = sharedPreferences.getString("searchCacheAlbum", null)
+        val jsonDataTrack = sharedPreferences.getString("searchCacheTrack", null)
+
+        val json = Json {
+            ignoreUnknownKeys = true
+        }
+
+        if (!jsonDataAlbum.isNullOrEmpty()) {
+            val albums = json.decodeFromString<List<Album>>(jsonDataAlbum)
+            data["albums"] = albums
+        }
+
+        if (!jsonDataTrack.isNullOrEmpty()) {
+            val tracks = json.decodeFromString<List<Track>>(jsonDataTrack)
+            data["tracks"] = tracks
+        }
     }
 
     private fun search() {
@@ -65,16 +109,27 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun observeResults() {
         viewModelSearch.searchState.observe(viewLifecycleOwner) { response ->
             if (response is SearchState.Success) {
-                val dataList = when (binding.searchOptions.checkedRadioButtonId) {
-                    R.id.tracks -> Converter.convertTrackRToTracks(response.result as List<TrackR>)
-                    R.id.albums -> Converter.convertAlbumRToAlbums(response.result as List<AlbumR>)
-                    else -> emptyList()
+                val searchData: List<SearchItem>
+                when (binding.searchOptions.checkedRadioButtonId) {
+                    R.id.tracks -> {
+                        searchData =
+                            RemoteToLocalConv.convertTrackRToTracks(response.result as List<TrackR>)
+                        saveSearchData(searchData)
+                    }
+
+                    R.id.albums -> {
+                        searchData =
+                            RemoteToLocalConv.convertAlbumRToAlbums(response.result as List<AlbumR>)
+                        saveSearchData(searchData)
+                    }
+
+                    else -> searchData = emptyList()
                 }
 
-                if (dataList.isEmpty()) {
+                if (searchData.isEmpty()) {
                     showLottieAnimation()
                 } else {
-                    rvAdapter.updateData(dataList)
+                    rvAdapter.updateData(searchData)
                     showRecyclerView()
                 }
             } else if (response is SearchState.Error) {
@@ -86,6 +141,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun showLottieAnimation() {
         binding.lottieView.visibility = View.VISIBLE
+        binding.lottieView.play()
         binding.recyclerViewResults.visibility = View.GONE
     }
 
@@ -118,10 +174,24 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun requestSearch(radioId: Int) {
         val query = binding.searchBar.query.toString()
-        if (query.isNotEmpty()) {
-            when (radioId) {
-                R.id.tracks -> viewModelSearch.searchByTrack(query)
-                R.id.albums -> viewModelSearch.searchByAlbum(query)
+
+        when (radioId) {
+            R.id.tracks -> {
+                if (query.isNotEmpty()) {
+                    viewModelSearch.searchByTrack(query)
+                } else {
+                    loadSearchCache()
+                    rvAdapter.updateData(data["tracks"]!!)
+                }
+            }
+
+            R.id.albums -> {
+                if (query.isNotEmpty()) {
+                    viewModelSearch.searchByAlbum(query)
+                } else {
+                    loadSearchCache()
+                    rvAdapter.updateData(data["albums"]!!)
+                }
             }
         }
     }

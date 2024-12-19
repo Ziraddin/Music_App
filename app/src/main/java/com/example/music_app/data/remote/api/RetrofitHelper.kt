@@ -1,6 +1,6 @@
 package com.example.music_app.data.remote.api
 
-import com.example.music_app.core.constants.Constants.baseUrl
+import com.example.music_app.core.Constants.baseUrl
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

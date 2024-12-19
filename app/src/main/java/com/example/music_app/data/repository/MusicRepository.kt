@@ -1,9 +1,8 @@
 package com.example.music_app.data.repository
 
-import com.example.music_app.core.database.AppDatabase
+import com.example.music_app.data.local.database.AppDatabase
 import com.example.music_app.data.local.entity.PlaylistEntity
 import com.example.music_app.data.local.entity.QuizEntity
-import com.example.music_app.data.local.entity.SearchCacheEntity
 
 class MusicRepository(private val db: AppDatabase) {
 
@@ -17,7 +16,4 @@ class MusicRepository(private val db: AppDatabase) {
     suspend fun updatePlaylist(playlist: PlaylistEntity) = db.playlistDao().updatePlaylist(playlist)
     suspend fun deletePlaylist(playlist: PlaylistEntity) = db.playlistDao().deletePlaylist(playlist)
 
-
-    suspend fun getCachedSearch(query: String) = db.searchCacheDao().getCachedSearch(query)
-    suspend fun cacheSearch(search: SearchCacheEntity) = db.searchCacheDao().cacheSearch(search)
 }

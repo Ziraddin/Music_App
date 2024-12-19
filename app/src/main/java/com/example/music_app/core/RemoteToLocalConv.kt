@@ -1,11 +1,11 @@
-package com.example.music_app.core.constants
+package com.example.music_app.core
 
 import com.example.music_app.data.remote.model.AlbumR
 import com.example.music_app.data.remote.model.TrackR
 import com.example.music_app.ui.search.data.Album
 import com.example.music_app.ui.search.data.Track
 
-object Converter {
+object RemoteToLocalConv {
 
     fun convertAlbumRToAlbums(albumRList: List<AlbumR>): List<Album> {
         return albumRList.map { albumR ->

@@ -60,6 +60,7 @@ class QuizChallangeFragment : Fragment() {
 
     private fun setupViewPager(quiz: Quiz) {
         viewPager.adapter = questionAdapter
+        viewPager.setUserInputEnabled(false)
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)

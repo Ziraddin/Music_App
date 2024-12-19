@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.music_app.core.constants.Converter
-import com.example.music_app.core.constants.SharedFunctions
+import com.example.music_app.core.RemoteToLocalConv
+import com.example.music_app.core.SharedFunctions
 import com.example.music_app.data.remote.model.TrackR
 import com.example.music_app.databinding.BottomSheetSelectPlaylistBinding
 import com.example.music_app.databinding.FragmentAlbumDetailsBinding
@@ -96,7 +96,7 @@ class AlbumDetailsFragment : Fragment() {
                 for (trackR in response.result as List<TrackR>) {
                     trackR.artist.picture_big = album.artist_image
                 }
-                album.tracks = Converter.convertTrackRToTracks(response.result as List<TrackR>)
+                album.tracks = RemoteToLocalConv.convertTrackRToTracks(response.result as List<TrackR>)
                 rvAdapter.updateData(album.tracks)
             } else if (response is SearchState.Error) {
                 println("Error: ${response.message}")

@@ -76,7 +76,6 @@
         android:id="@+id/lottie_view"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_gravity="center"
         android:layout_marginTop="32dp"
         app:dotLottie_loop="true"
         app:dotLottie_speed="1"

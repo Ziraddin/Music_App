@@ -1,4 +1,4 @@
-package com.example.music_app.core.database
+package com.example.music_app.data.local.database
 
 import android.content.Context
 import androidx.room.Database
@@ -7,15 +7,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.music_app.data.local.dao.PlaylistDao
 import com.example.music_app.data.local.dao.QuizDao
-import com.example.music_app.data.local.dao.SearchCacheDao
 import com.example.music_app.data.local.entity.Converters
 import com.example.music_app.data.local.entity.PlaylistEntity
 import com.example.music_app.data.local.entity.QuizEntity
-import com.example.music_app.data.local.entity.SearchCacheEntity
 
 
 @Database(
-    entities = [QuizEntity::class, PlaylistEntity::class, SearchCacheEntity::class],
+    entities = [QuizEntity::class, PlaylistEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -24,7 +22,6 @@ import com.example.music_app.data.local.entity.SearchCacheEntity
 abstract class AppDatabase : RoomDatabase() {
     abstract fun quizDao(): QuizDao
     abstract fun playlistDao(): PlaylistDao
-    abstract fun searchCacheDao(): SearchCacheDao
 
     companion object {
         @Volatile

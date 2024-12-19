@@ -3,14 +3,15 @@ package com.example.music_app.ui.search.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.music_app.core.constants.SharedFunctions
+import com.example.music_app.core.SharedFunctions
 import com.example.music_app.databinding.SearchGridItemBinding
 import com.example.music_app.ui.search.data.Album
+import com.example.music_app.ui.search.data.SearchItem
 import com.example.music_app.ui.search.data.Track
 import kotlin.reflect.KFunction1
 
 class GridRVAdapter(
-    private var itemList: List<Any>,
+    private var itemList: List<SearchItem>,
     private val onItemClick: (Any) -> Unit,
     private val onLongPress: KFunction1<Track, Unit>,
 ) : RecyclerView.Adapter<GridRVAdapter.TrackViewHolder>() {
@@ -42,7 +43,11 @@ class GridRVAdapter(
         }
     }
 
-    fun updateData(newData: List<Any>) {
+    fun getData(): List<SearchItem> {
+        return itemList
+    }
+
+    fun updateData(newData: List<SearchItem>) {
         itemList = newData
         notifyDataSetChanged()
     }
