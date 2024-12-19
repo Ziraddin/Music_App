@@ -10,7 +10,7 @@
 
 ### Search by tracks or albums
 
-<img src="search/Screenshot_1.png" alt="drawing" width="200"/> <img src="search/Screenshot_2.png" alt="drawing" width="200"/>
+<img src="finalProject/search/Screenshot_1.png" alt="drawing" width="200"/> <img src="finalProject/search/Screenshot_2.png" alt="drawing" width="200"/>
 
     2. Results:
     Results are shown in a scrollable grid format using a RecyclerView.
@@ -22,7 +22,7 @@
 
 ### Long-pressing an item
 
-<img src="search/Screenshot_5.png" alt="drawing" width="200"/>
+<img src="finalProject/search/Screenshot_5.png" alt="drawing" width="200"/>
 
 ## Details Screen
 
@@ -32,7 +32,7 @@
 
 ### Track Details_____________ Album Details__________
 
-<img src="search/Screenshot_4.png" alt="drawing" width="200"/> <img src="search/Screenshot_3.png" alt="drawing" width="200"/>
+<img src="finalProject/search/Screenshot_4.png" alt="drawing" width="200"/> <img src="finalProject/search/Screenshot_3.png" alt="drawing" width="200"/>
 
 # Playlist Screen
 
@@ -40,19 +40,19 @@
 
 ### Creation of Playlist________  Adding new Playlist
 
-<img src="playlist/Screenshot_3.png" alt="drawing" width="200"/> <img src="playlist/Screenshot_4.png" alt="drawing" width="200"/> 
+<img src="finalProject/playlist/Screenshot_3.png" alt="drawing" width="200"/> <img src="finalProject/playlist/Screenshot_4.png" alt="drawing" width="200"/> 
 
 * #### Users Delete and Edit playlists whenever they want.
 
 ### Edit and Delete section____ Delete Playlist
 
- <img src="playlist/Screenshot_1.png" alt="drawing" width="200"/> <img src="playlist/Screenshot_2.png" alt="drawing" width="200"/> 
+ <img src="finalProject/playlist/Screenshot_1.png" alt="drawing" width="200"/> <img src="finalProject/playlist/Screenshot_2.png" alt="drawing" width="200"/> 
 
 * #### Each playlist consists of multiple tracks stored locally in the app's database.
 
 ### Inside of Playlist
 
- <img src="playlist/Screenshot_5.png" alt="drawing" width="200"/>
+ <img src="finalProject/playlist/Screenshot_5.png" alt="drawing" width="200"/>
 
 # Quiz Screen
 
@@ -65,13 +65,13 @@
 
 ### Creation of Quiz
 
- <img src="quiz/Screenshot_1.png" alt="drawing" width="200"/> <img src="quiz/Screenshot_2.png" alt="drawing" width="200"/>  
+ <img src="finalProject/quiz/Screenshot_1.png" alt="drawing" width="200"/> <img src="finalProject/quiz/Screenshot_2.png" alt="drawing" width="200"/>  
 
 * #### Users can edit playlist name and delete it whenever they want. Additionally, when they click to quiz they see associated playlist and "start quiz" button
 
 ### Edit and Delete quiz______ Start Quiz
 
- <img src="quiz/Screenshot_3.png" alt="drawing" width="200"/> <img src="quiz/Screenshot_4.png" alt="drawing" width="200"/>  
+ <img src="finalProject/quiz/Screenshot_3.png" alt="drawing" width="200"/> <img src="finalProject/quiz/Screenshot_4.png" alt="drawing" width="200"/>  
 
 * #### Quiz Gameplay
     * A preview of the track is played for each question.
@@ -81,15 +81,15 @@
 
 ### Quiz Game
 
-<img src="quiz/Screenshot_5.png" alt="drawing" width="200"/>
-<img src="quiz/Screenshot_7.jpg" alt="drawing" width="200"/> 
+<img src="finalProject/quiz/Screenshot_5.png" alt="drawing" width="200"/>
+<img src="finalProject/quiz/Screenshot_7.jpg" alt="drawing" width="200"/> 
 
 # Second Section: App Architecture and Implementation Choices
 
 Our project follows the Model-View-ViewModel (MVVM) architecture to ensure scalability,
 maintainability, and separation of concerns.
 
-<img src="search/Screenshot_6.png" alt="drawing" width="400"/> 
+<img src="finalProject/search/Screenshot_6.png" alt="drawing" width="400"/> 
 
 ## Implementation Choices
 
